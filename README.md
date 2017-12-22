@@ -1,11 +1,14 @@
 # magicalnaozhong1
 演示项目
+
+
 #include <avr/sleep.h>
 #include <avr/power.h>
 #include <IRremote.h>
 #include <U8glib.h>
 #include <Adafruit_NeoPixel.h>//引用头文件
-#define PIN 6   /*定义了控制LED的引脚，6表示Microduino的D6引脚，可通过Hub转接出来，用户可以更改 */
+#define PIN 6  
+/*定义了控制LED的引脚，6表示Microduino的D6引脚，可通过Hub转接出来，用户可以更改 */
 #define PIN_NUM 2 //定义允许接的led灯的个数
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(PIN_NUM, PIN, NEO_GRB + NEO_KHZ800);
@@ -13,11 +16,16 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(PIN_NUM, PIN, NEO_GRB + NEO_KHZ800);
 int RECV_PIN = 10;
 IRrecv irrecv(RECV_PIN);
 decode_results results;
-int pin2 = 2;
- 
+int pin2 = 2; 
 long previousMillis = 0;        // 存储LED最后一次的更新
 long interval =  60000;           // 闪烁的时间间隔（毫秒）
-unsigned long currentMillis=0; void pin2Interrupt(void) {
+unsigned long currentMillis=0; 
+
+
+
+
+void pin2Interrupt(void) 
+{
     /* 中断唤醒 */
  
     /*当中断引脚为低电平时关闭中断*/
@@ -61,6 +69,7 @@ unsigned long currentMillis=0; void pin2Interrupt(void) {
 }
 
 
+
  void enterSleep(void) {
 
     attachInterrupt(0, pin2Interrupt, HIGH);
@@ -73,6 +82,8 @@ unsigned long currentMillis=0; void pin2Interrupt(void) {
     strip.show();  //LED显示
     delay(1000);  //延迟1秒输出
 }
+
+
 void setup() {
     Serial.begin(9600);
     strip.begin();   //准备对灯珠进行数据发送
@@ -81,6 +92,7 @@ void setup() {
     irrecv.enableIRIn(); // 启动红外解码
     Serial.println("Initialisation complete.");
 }
+ 
  
 /***************************************************
  *  Name:        loop

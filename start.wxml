@@ -1,0 +1,20 @@
+<!--start.wxml-->
+
+<button class="btn1" bindtap="getDataFromOneNet">
+����de����</button>
+
+<radio-group class="radio-group" bindchange="radioChange">
+  <label style="display: flex"  wx:for="{{items}}">
+    <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+  </label>
+</radio-group>
+
+
+<input id="input" placeholder="��������ֵ" 
+placeholder-style="font-size:15px; color:greenyellow" 
+style="font-weight:bolder; font-size:15px; color:#333333; padding-left: 30rpx"
+  bindinput="change"/>
+
+<text id="text">��ʾ���ٲ��𴲾ͳٵ���</text>
+<button id="btn3" style="opacity: {{opacity}}" 
+disabled="{{disabled}}" bindtap="send">�������޵��ҵķ�����</button>

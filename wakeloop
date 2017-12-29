@@ -52,3 +52,45 @@ strip.setPixelColor(0, strip.Color(0, 0, 0));//灭
 strip.show();  //LED显示
 delay(1000);  //延迟1秒输出
 }
+
+
+void setup() { 
+Serial.begin(9600); 
+strip.begin(); //准备对灯珠进行数据发送
+/* Setup the pin direction. */ 
+pinMode(pin2, INPUT);
+irrecv.enableIRIn(); // 启动红外解码 
+Serial.println("Initialisation complete.");
+}
+
+/***************************************************
+
+Name: loop
+
+Returns: Nothing.
+
+Parameters: None.
+
+Description: Main application loop.
+***************************************************/ 
+void loop() {
+
+currentMillis = millis(); 
+Serial.print("Awake for "); 
+Serial.print(currentMillis - previousMillis, DEC); 
+Serial.println(" second"); delay(1000);
+if (irrecv.decode(&results)) {
+Serial.println(results.value, HEX);
+
+irrecv.resume(); // 接收下一个值 
+previousMillis = currentMillis;
+}
+
+if(currentMillis - previousMillis > 5000) { 
+previousMillis = currentMillis;
+currentMillis = millis();
+Serial.println("Entering sleep"); enterSleep(); 
+}
+if(currentMillis<previousMillis)
+previousMillis=currentMillis=0; 
+}//开始时苏醒5秒，然后进入睡眠状态

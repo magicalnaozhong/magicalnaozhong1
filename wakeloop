@@ -38,3 +38,17 @@ if(currentMillis - previousMillis > interval) {
 if(currentMillis<previousMillis)
 { previousMillis=currentMillis=0; }
 }
+
+
+void enterSleep(void) {
+
+attachInterrupt(0, pin2Interrupt, HIGH);
+delay(100);
+set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+sleep_enable();
+sleep_mode();
+sleep_disable(); 
+strip.setPixelColor(0, strip.Color(0, 0, 0));//灭
+strip.show();  //LED显示
+delay(1000);  //延迟1秒输出
+}

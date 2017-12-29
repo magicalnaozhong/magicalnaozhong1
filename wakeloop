@@ -1,0 +1,40 @@
+void pin2Interrupt(void) { /* 中断唤醒 */
+
+/*当中断引脚为低电平时关闭中断*/
+Serial.println("wake up!!!");
+detachInterrupt(1);
+while(1) {
+strip.setPixelColor(0, strip.Color(255, 0, 0));//红光
+strip.show(); //LED显示 
+delay(1000); //延迟1秒输出 
+strip.setPixelColor(0, strip.Color(0, 255, 0));//绿光
+strip.show(); //LED显示 
+delay(1000); //延迟1秒输出
+strip.setPixelColor(0, strip.Color(0, 0, 255));//蓝光 
+strip.show(); //LED显示 
+delay(1000); //延迟1秒输出 
+strip.setPixelColor(0, strip.Color(0, 0, 0));//灭
+strip.show(); //LED显示
+delay(1000); //延迟1秒输出 
+/*循环以下：触摸苏醒60秒，亮灯红绿蓝（上），然后进入睡眠状态*/ 
+currentMillis = millis(); 
+Serial.print("Awake for "); 
+Serial.print(currentMillis - previousMillis, DEC);
+Serial.println(" second");
+delay(1000); 
+if (irrecv.decode(&results))
+{
+Serial.println(results.value, HEX);
+  irrecv.resume(); // 接收下一个值
+  previousMillis = currentMillis;
+}
+
+if(currentMillis - previousMillis > interval) {
+  previousMillis = currentMillis; 
+  currentMillis = millis();
+  Serial.println("Entering sleep");
+  enterSleep();
+}
+if(currentMillis<previousMillis)
+{ previousMillis=currentMillis=0; }
+}

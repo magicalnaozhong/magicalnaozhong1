@@ -1,0 +1,101 @@
+#define  sensorPin  6//定义人体红外驱动引脚
+
+#define buzzer_pin 4 //定义蜂鸣器驱动引脚
+
+
+
+int song[] = {
+
+  262, 262, 294, 262, 349, 330,
+
+  262, 262, 294, 262, 392, 349,
+
+  262, 262, 523, 440, 349, 330, 294,
+
+  494, 494, 440, 349, 392, 349
+
+};
+
+
+
+int noteDurations[] = {
+
+  4, 4, 2, 2, 2, 1,
+
+  4, 4, 2, 2, 2, 1,
+
+  4, 4, 2, 2, 2, 2, 2,
+
+  4, 4, 2, 2, 2, 1
+
+};
+
+
+
+
+
+int state;
+
+  void song_play()
+
+{
+
+  for (int thisNote = 0; thisNote < 25; thisNote++)
+
+  {
+
+    int noteDuration = 1000 / noteDurations[thisNote];
+
+    tone(buzzer_pin, song[thisNote], noteDuration);
+
+    int pauseBetweenNotes = noteDuration * 1.20;
+
+    delay(pauseBetweenNotes);
+
+    noTone(buzzer_pin);
+
+  }
+
+}
+
+
+
+void setup()
+
+{
+
+  pinMode(sensorPin, INPUT);
+
+  Serial.begin(9600);
+
+  pinMode(buzzer_pin, OUTPUT);
+
+}
+
+void loop()
+
+{
+
+  state = digitalRead(sensorPin);
+
+  if (state == 1)
+
+   {
+
+    Serial.println("Somebody is in this area!");
+
+   }
+
+  else
+
+  {
+
+    Serial.println("No one!");
+
+     song_play();
+
+  }
+
+delay(5000);
+
+}

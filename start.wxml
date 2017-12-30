@@ -1,20 +1,32 @@
 <!--start.wxml-->
 
-<button class="btn1" bindtap="getDataFromOneNet">
-����de����</button>
+<button class="area" bindtap="getDataFromOneNet">
+今日de天气</button>
+
+<button  class="area" bindtap="plan">今日计划</button>
 
 <radio-group class="radio-group" bindchange="radioChange">
   <label style="display: flex"  wx:for="{{items}}">
-    <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+    <radio value="{{item.name 
+
+}}" checked="{{item.checked}}"/>{{item.value}}
   </label>
+
 </radio-group>
 
 
-<input id="input" placeholder="��������ֵ" 
+<input id="input" placeholder="输入门限值" 
 placeholder-style="font-size:15px; color:greenyellow" 
 style="font-weight:bolder; font-size:15px; color:#333333; padding-left: 30rpx"
   bindinput="change"/>
 
-<text id="text">��ʾ���ٲ��𴲾ͳٵ���</text>
+<text id="text">提示：再不起床就迟到了</text>
 <button id="btn3" style="opacity: {{opacity}}" 
-disabled="{{disabled}}" bindtap="send">�������޵��ҵķ�����</button>
+disabled="{{disabled}}" bindtap="send">发送门限到我的服务器</button>
+
+<view class="btn">
+<button  bindtap="addmemo" type="primary">添加备忘</button>
+</view>
+<view class="area" wx:if="{{input}}">
+<textarea bindconfirm="confirm" auto-height placeholder="a请输入待办事项"/>
+</view>

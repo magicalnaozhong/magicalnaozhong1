@@ -274,7 +274,7 @@ function getDataRange(minData, maxData) {
 function measureText(text) {
     var fontSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 
-    // wx canvas δʵ��measureText����, �˴�����ʵ��
+    // wx canvas 未实现measureText方法, 此处自行实现
     text = String(text);
     var text = text.split('');
     var width = 0;
@@ -784,7 +784,7 @@ function drawRingTitle(opts, config, context) {
 }
 
 function drawPointText(points, series, config, context) {
-    // ���������İ�
+    // 绘制数据文案
     var data = series.data;
 
     context.beginPath();
@@ -1043,7 +1043,7 @@ function drawColumnDataPoints(series, opts, config, context) {
         var points = getDataPoints(data, minRange, maxRange, xAxisPoints, eachSpacing, opts, config, process);
         points = fixColumeData(points, eachSpacing, series.length, seriesIndex, config, opts);
 
-        // ������״����ͼ
+        // 绘制柱状数据图
         context.beginPath();
         context.setFillStyle(eachSeries.color);
         points.forEach(function (item, index) {
@@ -1096,7 +1096,7 @@ function drawAreaDataPoints(series, opts, config, context) {
         var splitPointList = splitPoints(points);
 
         splitPointList.forEach(function (points) {
-            // ������������
+            // 绘制区域数据
             context.beginPath();
             context.setStrokeStyle(eachSeries.color);
             context.setFillStyle(eachSeries.color);
@@ -1270,7 +1270,7 @@ function drawXAxis(categories, opts, config, context) {
     context.closePath();
     context.stroke();
 
-    // ��X���б�����ϡ����
+    // 对X轴列表做抽稀处理
     var validWidth = opts.width - 2 * config.padding - config.yAxisWidth - config.yAxisTitleWidth;
     var maxXAxisListLength = Math.min(categories.length, Math.ceil(validWidth / config.fontSize / 1.5));
     var ratio = Math.ceil(categories.length / maxXAxisListLength);
@@ -1545,7 +1545,7 @@ function drawRadarDataPoints(series, opts, config, context) {
 
     var radarDataPoints = getRadarDataPoints(coordinateAngle, centerPosition, radius, series, opts, process);
     radarDataPoints.forEach(function (eachSeries, seriesIndex) {
-        // ������������
+        // 绘制区域数据
         context.beginPath();
         context.setFillStyle(eachSeries.color);
         context.setGlobalAlpha(0.6);

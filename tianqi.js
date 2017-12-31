@@ -1,4 +1,4 @@
-var myCharts = require("../../../utils/wxcharts.js")//����һ����ͼ�Ĳ��
+var myCharts = require("../../../utils/wxcharts.js")//引入一个绘图的插件
 var lineChart_hum = null
 var lineChart_light = null
 var lineChart_tempe = null
@@ -12,7 +12,7 @@ Page({
   },
 
 
-  //���õ�������ת���ɻ�ͼ�����Ҫ�������ʽ
+  //把拿到的数据转换成绘图插件需要的输入格式
   convert: function () {
     var categories = [];
     var humidity = [];
@@ -37,7 +37,7 @@ Page({
   onLoad: function () {
     var wheatherData = this.convert();
     
-    //�õ���Ļ����
+    //得到屏幕宽度
     var windowWidth = 320;
     try {
       var res = wx.getSystemInfoSync();
@@ -48,7 +48,7 @@ Page({
 
     var wheatherData = this.convert();
 
-    //�½�ʪ��ͼ��
+    //新建湿度图表
     lineChart_hum = new myCharts({
       canvasId: 'humidity',
       type: 'line',
@@ -81,7 +81,7 @@ Page({
       }
     });
 
-  //�½�����ǿ��ͼ��
+  //新建光照强度图表
     lineChart_light = new myCharts({
       canvasId: 'light',
       type: 'line',
@@ -114,7 +114,7 @@ Page({
       }
     });
 
-    //�½��¶�ͼ��
+    //新建温度图表
     lineChart_tempe = new myCharts({
       canvasId: 'tempe',
       type: 'line',
@@ -132,7 +132,7 @@ Page({
         disableGrid: true
       },
       yAxis: {
-        title: 'temperature (���϶�)',
+        title: 'temperature (摄氏度)',
         format: function (val) {
           return val.toFixed(2);
         },

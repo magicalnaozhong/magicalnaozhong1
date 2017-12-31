@@ -7,7 +7,7 @@ App({
   onHide: function () {
   },
 
-  //��Ӧ��ȫ������
+  //本应用全局数据
   globalData: {
     temperature: {},
     light: {},

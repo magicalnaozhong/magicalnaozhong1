@@ -1,5 +1,7 @@
 <!--start.wxml-->
-
+/***********************
+添加了一个button,今日计划，请删除这段文字
+***********************/
 <button class="area" bindtap="getDataFromOneNet">
 今日de天气</button>
 
@@ -23,6 +25,9 @@ style="font-weight:bolder; font-size:15px; color:#333333; padding-left: 30rpx"
 <text id="text">提示：再不起床就迟到了</text>
 <button id="btn3" style="opacity: {{opacity}}" 
 disabled="{{disabled}}" bindtap="send">发送门限到我的服务器</button>
+/*******************************************************
+以下添加备忘窗口，请删除这段文字
+*******************************************************/
 
 <view class="btn">
 <button  bindtap="addmemo" type="primary">添加备忘</button>
